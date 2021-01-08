@@ -23,4 +23,4 @@ app.get('/race', async (req, res) => {
     res.sendFile(path.join(__dirname, '../client/pages/race.html'));
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`UdaciRacer listening on port ${port}!`))
