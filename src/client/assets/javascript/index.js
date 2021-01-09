@@ -16,12 +16,13 @@ const updateStore = (store, newState) => {
 	store = Object.assign(store, newState);
 }
 
-// Wait until the DOM is loaded
+// wait until the DOM is loaded
 document.addEventListener("DOMContentLoaded", function() {
 	onPageLoad()
 	setupClickHandlers()
 })
 
+// render tracks and racers on page load
 async function onPageLoad() {
 	try {
 		getTracks()
@@ -101,7 +102,7 @@ async function handleCreateRace() {
 	}
 }
 
-// get race info every 500ms
+// get race info every 500ms or render results
 function runRace(raceID) {
 	return new Promise(resolve => {
 		const raceInfo = setInterval(() => {
@@ -111,7 +112,7 @@ function runRace(raceID) {
 						renderAt('#leaderBoard', raceProgress(res.positions))
 					} else {
 						clearInterval(raceInfo)
-						renderAt('#race', resultsView(res.positions)) // render the results view
+						renderAt('#race', resultsView(res.positions))
 						resolve(res)
 					}
 				})
@@ -142,7 +143,7 @@ async function runCountdown() {
 }
 
 function handleSelectPodRacer(target) {
-	console.log("selected a pod", target.id)
+	console.log("Vehicle selected", target.id)
 
 	// remove class selected from all racer options
 	const selected = document.querySelector('#racers .selected')
@@ -157,7 +158,7 @@ function handleSelectPodRacer(target) {
 }
 
 function handleSelectTrack(target) {
-	console.log("selected a track", target.id)
+	console.log("Track selected", target.id)
 
 	// remove class selected from all track options
 	const selected = document.querySelector('#tracks .selected')
@@ -319,6 +320,7 @@ function defaultFetchOpts() {
 	}
 }
 
+// [GET] ${SERVER}/api/tracks
 function getTracks() {
 	return fetch(`${SERVER}/api/tracks`, {
 		...defaultFetchOpts()
@@ -327,6 +329,7 @@ function getTracks() {
 		.catch(err => console.log("Error with getTracks request::", err))
 }
 
+// [GET] ${SERVER}/api/cars
 function getRacers() {
 	return fetch(`${SERVER}/api/cars`, {
 		...defaultFetchOpts()
@@ -335,6 +338,7 @@ function getRacers() {
 		.catch(err => console.log("Error with getRacers request::", err))
 }
 
+// [POST] ${SERVER}/api/races 
 function createRace(player_id, track_id) {
 	player_id = parseInt(player_id)
 	track_id = parseInt(track_id)
@@ -350,6 +354,7 @@ function createRace(player_id, track_id) {
 	.catch(err => console.log("Error with createRace request::", err))
 }
 
+// [GET] ${SERVER}/api/races/${id}
 function getRace(id) {
 	return fetch(`${SERVER}/api/races/${id}`, {
 		...defaultFetchOpts(),
@@ -358,6 +363,7 @@ function getRace(id) {
 	.catch(err => console.log("Error with getRace request::", err))
 }
 
+// [POST] ${SERVER}/api/races/${id}/start
 function startRace(id) {
 	return fetch(`${SERVER}/api/races/${id}/start`, {
 		method: 'POST',
@@ -366,6 +372,7 @@ function startRace(id) {
 	.catch(err => console.log("Error with startRace request::", err))
 }
 
+// [POST] ${SERVER}/api/races/${id}/accelerate
 function accelerate(id) {
 	return fetch(`${SERVER}/api/races/${id}/accelerate`, {
 		method: 'POST',

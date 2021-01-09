@@ -97,6 +97,6 @@ Accelerate a car
 
 - Returns nothing
 
-### Acknowledgements
+## Acknowledgements
 
 The Udacity Team for providing the API and HTML views.
