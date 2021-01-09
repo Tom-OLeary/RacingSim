@@ -12,17 +12,9 @@ The game has three main views:
 
 3. The race results view
 
-## Starter Code
-
-We have supplied you with the following:
-
-1. An API. The API is provided in the form of a binary held in the bin folder. You never need to open the binary file, as there are no edits you can make to it. Your work will be 100% in the front end.
-
-2. HTML Views. The focus of this course is not UI development or styling practice, so we have already provided you with pieces of UI, all you have to do is call them at the right times.
-
 ## Getting Started
 
-In order to build this game, we need to run two things: the game engine API and the front end.
+In order to build this game, you need to run two things: the game engine API and the front end.
 
 ### Start the Server
 

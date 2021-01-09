@@ -12,10 +12,6 @@ const store = {
 	tracks: undefined
 }
 
-const updateStore = (store, newState) => {
-	store = Object.assign(store, newState);
-}
-
 // wait until the DOM is loaded
 document.addEventListener("DOMContentLoaded", function() {
 	onPageLoad()
@@ -274,7 +270,7 @@ function resultsView(positions) {
 }
 
 function raceProgress(positions) {
-	let userPlayer = positions.find((e) => parseInt(e.id) === parseInt(store.player_id))
+	const userPlayer = positions.find((e) => parseInt(e.id) === parseInt(store.player_id))
 	userPlayer.driver_name += " (you)"
 
 	positions = positions.sort((a, b) => (a.segment > b.segment) ? -1 : 1)
