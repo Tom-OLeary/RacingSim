@@ -1,4 +1,4 @@
-// The store will hold all information needed globally
+// all information needed globally
 var store = {
 	track_id: undefined,
 	player_id: undefined,
@@ -6,7 +6,7 @@ var store = {
 	tracks: undefined
 }
 
-// A function to update the store
+// update the store
 const updateStore = (store, newState) => {
 	store = Object.assign(store, newState);
 }
@@ -76,7 +76,7 @@ async function delay(ms) {
 	}
 }
 
-// This async function controls the flow of the race, add the logic and error handling
+// controls the flow of the race
 async function handleCreateRace() {
 	const { player_id, track_id, tracks } = store
 
@@ -84,13 +84,12 @@ async function handleCreateRace() {
 	renderAt('#race', renderRaceStartView(tracks.find(track => parseInt(track.id) === parseInt(track_id))))
 	
 	try {
-
 		const race = await createRace(player_id, track_id)
 
 		store.race_id = race.ID
 
 		await runCountdown()
-		await startRace(race.ID- 1)
+		await startRace(race.ID - 1)
 		await runRace(race.ID - 1)
 	} catch (err) {
 		console.log("Error in handleCreateRace()", err.message)
@@ -149,7 +148,6 @@ function handleSelectPodRacer(target) {
 	// add class selected to current target
 	target.classList.add('selected')
 
-	// TODO - save the selected racer to the store
 	store.player_id = target.id
 }
 
@@ -165,7 +163,6 @@ function handleSelectTrack(target) {
 	// add class selected to current target
 	target.classList.add('selected')
 
-	// TODO - save the selected track id to the store
 	store.track_id = target.id
 }
 
