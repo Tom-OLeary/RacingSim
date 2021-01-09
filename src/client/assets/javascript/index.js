@@ -1,3 +1,9 @@
+/* 
+Tom O'Leary
+Racing Simulator
+index.js
+*/
+
 // all information needed globally
 var store = {
 	track_id: undefined,
@@ -6,7 +12,6 @@ var store = {
 	tracks: undefined
 }
 
-// update the store
 const updateStore = (store, newState) => {
 	store = Object.assign(store, newState);
 }
@@ -96,9 +101,9 @@ async function handleCreateRace() {
 	}
 }
 
+// get race info every 500ms
 function runRace(raceID) {
 	return new Promise(resolve => {
-	// get race info every 500ms
 		const raceInfo = setInterval(() => {
 			getRace(raceID)
 				.then(res => {
